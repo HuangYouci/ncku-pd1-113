@@ -3,9 +3,9 @@
 int main(){
 	long long input;
 	scanf("%lld",&input);
-	int a,b,c,d,e;
+	long long int a,b,c,d,e;
 	char n;
-	scanf("NCKU%d%c%d%c%d%c%d%c%d",&a,&n,&b,&n,&c,&n,&d,&n,&e);
-	printf("\"%d\" \"%d\" \"%d\" \"%d\" \"%d\"\n",a,b,c,d,e);
+	scanf("NCKU%lld%c%lld%c%lld%c%lld%c%lld",&a,&n,&b,&n,&c,&n,&d,&n,&e);
+	printf("\"%lld\" \"%lld\" \"%lld\" \"%lld\" \"%lld\"\n",a,b,c,d,e);
 	return 0;
 }
