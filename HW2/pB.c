@@ -1,9 +1,9 @@
 #include <stdio.h>
 
-int main(){
+int main(int argc, char *argv[]){
 	int a, b, c, d;
 	FILE *ifp, *ofp;
-	ifp = fopen("testing_input.txt","r");
+	ifp = fopen(argv[1],"r");
 	ofp = fopen("answer.txt", "w");
 	fscanf(ifp, "%d", &a);
 	fscanf(ifp, "%d", &b);
