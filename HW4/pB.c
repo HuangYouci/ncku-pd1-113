@@ -5,6 +5,6 @@ int main() {
 
     scanf("%d", &N);
     float floatValue = *(float*)&N;
-    printf("Output: %.23e\n", floatValue);
+    printf("%.23e\n", floatValue);
     return 0;
 }
