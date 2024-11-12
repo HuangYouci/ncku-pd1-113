@@ -7,29 +7,25 @@ int main(){
 
     // input
 
-    int car[n];
+    int car[n], hov[n], presum[n+1];
+    presum[0] = 0;
     for(int i = 0; i < n ; i++){
         scanf("%d", &car[i]);
+        if (car[i] < k){
+            hov[i] = 1;
+        }else{
+            hov[i] = 0;
+        }
+        presum[i+1] = presum[i] + hov[i];
     }
 
-    int query[q][2];
+    int l, r, ansarray[q];
     for(int i = 0; i < q ; i++){
-        scanf("%d %d", &query[i][0], &query[i][1]);
+        scanf("%d %d", &l, &r);
+        ansarray[i] = (presum[r] - presum[l-1]);
     }
 
     // querying
-
-    int queryTemp, ansarray[q];
-
-    for(int i = 0; i < q ; i++){
-        queryTemp = 0;
-        for(int j = query[i][0]; j <= query[i][1] ; j++){
-            if (car[j-1] < k){
-                queryTemp++;
-            }
-        }
-        ansarray[i] = queryTemp;
-    }
     
     for (int i = 0; i < q; i++){
         printf("%d\n", ansarray[i]);
