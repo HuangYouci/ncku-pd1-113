@@ -1,83 +1,50 @@
 #include <stdio.h>
 
-int main(){
+int height[2000][2000];
+
+int main() {
     int n, m;
+
+    // 輸入 n*m 高度
     scanf("%d %d", &n, &m);
 
-    int height[n][m];
+    // 輸入每一個
+    // 順便判斷每一個 n 族的最大值
+    int nMax, nM[n], mM[m];
 
-    for (int i = 0 ; i < n ; i++){
-        for (int j = 0 ; j < m ; j++){
-            scanf("%d", &height[i][j]);
-        }
-    }
-
-    // ATTO: print
-    // printf("\n-=*= Beautiful Sky =*=-\n");
-    // for (int i = 0 ; i < n ; i++){
-    //     for (int j = 0 ; j < m ; j++){
-    //         printf("[%d] ", height[i][j]);
-    //     }
-    //     printf("\n");
-    // }
-
-    int temp;
-
-    // 北南天際線（列）
-    int nsSkyline[n];
-    for(int i = 0; i < m ; i++){
-        temp = 0;
-        for(int j = 0; j < n ; j++){
-            if (height[i][j] > temp) temp = height[i][j];
-        }
-        nsSkyline[i] = temp;
-    }
-
-    // 東西天際線（列）
-    int ewSkyline[n];
-    for(int i = 0; i < n ; i++){
-        temp = 0;
-        for(int j = 0; j < m ; j++){
-            if (height[j][i] > temp) temp = height[j][i];
-        }
-        ewSkyline[i] = temp;
-    }
+    for(int i = 0; i < n ; i++) nM[i] = 0;
+    for(int i = 0; i < m ; i++) mM[i] = 0;
     
-    // ATTO: CHECK
-    // printf("\nnsSkyline:\n");
-    // for(int i = 0; i < m; i++){
-    //     printf("%d,", nsSkyline[i]);
-    // }
-    // printf("\newSkyline:\n");
-    // for(int i = 0; i < m; i++){
-    //     printf("%d,", ewSkyline[i]);
-    // }
-    // printf("\n");
 
-    // ADD TIME
-    int add = 0, canbeadd = 0;
-    for (int i = 0; i < n ; i++){
-        for (int j = 0; j < m ; j++){
-            canbeadd = 0;
-            // 逐格判斷（假設是第一格）
-            // 他不能超過所屬NS（列）天際線 ==
-            // 他不能超過所屬EW（行）天際線 ||
-            // 所以他能加到所屬 NS 和 EW 的最小
-            // 他所屬於 i (NS)行 j (EW)列
-            if (nsSkyline[i] < ewSkyline[j]){
-                canbeadd = nsSkyline[i];
-            }else{
-                canbeadd = ewSkyline[j];
-            }
-            // 現在 canbeadd 是他能加到的最大值了
-            // 所以他能變多的單位是 canbeadd - 自己
+    for(int i = 0; i < n ; i++){
+        nMax = 0;
+        for(int j = 0; j < m ; j++){
+            // 輸入
+            scanf("%d", &height[i][j]);
+
+            // 判斷該 n 族的每一個 m 族之最大：nMax
+            if (height[i][j] > nMax) nMax = height[i][j];
+
+            // j 是 m 族。分別判斷該元素是否為所屬 m 族之最大
+            if (height[i][j] > mM[j]) mM[j] = height[i][j];
+        }
+        nM[i] = nMax;
+        // nMax 是那個 n 族的最大 m
+    }
+
+    // 有了 nM 和 mM 了
+    unsigned long long add = 0;
+    int canbeadd = 0;
+    for(int i = 0; i < n ; i++){
+        for ( int j = 0 ; j < m ; j++){
+            // 個別判斷每一格
+            canbeadd = nM[i];
+            if(mM[j] < nM[i]) canbeadd = mM[j];
             add += (canbeadd - height[i][j]);
         }
     }
 
-    printf("%d", add);
+    printf("%llu", add);
 
     return 0;
-
-    // finished HW5 by huangyouci at 2024.11.08 01:49
 }
