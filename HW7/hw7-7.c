@@ -1,7 +1,11 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
 
 int wait = 0;
+
+
 
 void spilt(char *input, int total, int now, char all_testcase[59049][11]){
     // a
@@ -11,6 +15,7 @@ void spilt(char *input, int total, int now, char all_testcase[59049][11]){
 
     input[now] = 'a';
     if(now == total){
+            input[now+1] = '\0';
             strcpy(all_testcase[wait], input);
             wait++;
         }else{
@@ -19,6 +24,7 @@ void spilt(char *input, int total, int now, char all_testcase[59049][11]){
 
     input[now] = 'b';
     if(now == total){
+            input[now+1] = '\0';
             strcpy(all_testcase[wait], input);
             wait++;
         }else{
@@ -27,6 +33,7 @@ void spilt(char *input, int total, int now, char all_testcase[59049][11]){
 
     input[now] = 'c';
     if(now == total){
+            input[now+1] = '\0';
             strcpy(all_testcase[wait], input);
             wait++;
         }else{
@@ -39,5 +46,4 @@ void GeneratingTest(int target_len, char all_testcase[59049][11]){
     char input[target_len];
     // printf("[1] 輸入 target_len: %d\n", target_len);
     spilt(input, (target_len-1), 0, all_testcase);
-
 }

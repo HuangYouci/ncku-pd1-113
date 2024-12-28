@@ -1,9 +1,16 @@
 #include <stdio.h>
+#include <string.h>
 
 int GameStart(){
-    int input;
     printf("Welcome to the game A = B, please select the level\n");
-    scanf("%d",&input);
+    char input[100] = "";
+    scanf("%s",input);
     getchar();
-    return (input == 1 || input == 2)? input : -1;
+    int result = 0;
+    for(int i=0;i<100;i++){
+        result += input[i];
+    }
+    if(result == 49) return 1;
+    else if(result == 50) return 2;
+    else return -1;
 }

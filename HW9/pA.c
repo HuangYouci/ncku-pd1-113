@@ -1,11 +1,13 @@
 #include <stdio.h>
+#include <math.h>
 
 double power(double x, int n){
-    double answer = 1;
-    for(;n>0;n--){
-        answer *= x;
-    }
-    return answer;
+    // double answer = 1;
+    // for(;n>0;n--){
+    //     answer *= x;
+    // }
+    // return answer;
+    return pow(x,n);
 }
 
 double multiply(double x, int n){
@@ -17,11 +19,12 @@ double divide(double x, int n){
 }
 
 double powerpower(double (*f)(double, int), double x, int n, int m){
-    double answer = 1;
-    for(;m>0;m--){
-        answer *= f(x,n);
-    }
-    return answer;
+    // double answer = 1;
+    // for(;m>0;m--){
+    //     answer *= f(x,n);
+    // }
+    // return answer;
+    return pow(f(x,n),m);
 }
 
 double powermultiply(double (*f)(double, int), double x, int n, int m){
@@ -95,15 +98,14 @@ int main(int argc, char *argv[]){
     double x = transferArgvToDouble(argv[1]);
     int n = transferArgvToInt(argv[2]);
     int m = transferArgvToInt(argv[3]);
-    printf("x: %f, n: %d, m: %d\n",x,n,m);
-    printf("result of (x^n)^m: %f\n", powerpower(power,x,n,m));
-    printf("result of (x*n)^m: %f\n", powerpower(multiply,x,n,m));
-    printf("result of (x/n)^m: %f\n", powerpower(divide,x,n,m));
-    printf("result of (x^n)*m: %f\n", powermultiply(power,x,n,m));
-    printf("result of (x*n)*m: %f\n", powermultiply(multiply,x,n,m));
-    printf("result of (x/n)*m: %f\n", powermultiply(divide,x,n,m));
-    printf("result of (x^n)/m: %f\n", powerdivide(power,x,n,m));
-    printf("result of (x*n)/m: %f\n", powerdivide(multiply,x,n,m));
-    printf("result of (x/n)/m: %f\n", powerdivide(divide,x,n,m));
+    printf("%f\n", powerpower(power,x,n,m));
+    printf("%f\n", powerpower(multiply,x,n,m));
+    printf("%f\n", powerpower(divide,x,n,m));
+    printf("%f\n", powermultiply(power,x,n,m));
+    printf("%f\n", powermultiply(multiply,x,n,m));
+    printf("%f\n", powermultiply(divide,x,n,m));
+    printf("%f\n", powerdivide(power,x,n,m));
+    printf("%f\n", powerdivide(multiply,x,n,m));
+    printf("%f\n", powerdivide(divide,x,n,m));
     return 0;
 }

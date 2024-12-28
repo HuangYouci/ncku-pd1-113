@@ -7,6 +7,7 @@
 #include "hw7-5.h"
 #include "hw7-6.h"
 #include "hw7-7.h"
+// gcc -o hw7-8 hw7-7.c hw7-6.c hw7-5.c hw7-4.c hw7-3.c hw7-2.c hw7-1.c main.c
 char all_testcase[59049][11];
 char string1[51][21], string2[51][21];
 char command[51][21];
